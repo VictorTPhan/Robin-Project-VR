@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class downloadImage : MonoBehaviour
+public class DownloadImage : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
    
-  public void setImage(string url)
+    public void setImage(string url)
     {
-        StartCoroutine(DownloadImage(url));
+        StartCoroutine(Download(url));
 
     }
-    IEnumerator DownloadImage(string MediaUrl)
+
+    IEnumerator Download(string MediaUrl)
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();

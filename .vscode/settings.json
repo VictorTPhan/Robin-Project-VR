@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Robin Project VR.sln"
+    "dotnet.defaultSolution": "Robin-Project-VR.sln"
 }

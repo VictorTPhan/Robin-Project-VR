@@ -7,25 +7,20 @@ public class API_Manager : MonoBehaviour
 {
     private string JsonString;
     private string APILink;
-    public downloadImage DLImage;
-    // Start is called before the first frame update
+    public DownloadImage DLImage;
+
     void Start()
     {
-        APILink = "https://68d5117f-1492-495c-8d29-1f479c728ed9-00-31o7o4c3rmgec.kirk.replit.dev";
+        APILink = "https://bella-server.onrender.com/";
     }
    
     public void RequestImage(string prompt)
     {
-        string uri = APILink + "/robin/" + prompt;
-        StartCoroutine(GetRobinAPIRequest(uri));
+        string uri = APILink + "/get_image/" + prompt;
+        StartCoroutine(GetAPIRequest(uri));
     }
-    // Update is called once per frame
     
-    void Update()
-    {
-        
-    }
-    IEnumerator GetRobinAPIRequest(string uri)
+    IEnumerator GetAPIRequest(string uri)
     {
         using UnityWebRequest webRequest = UnityWebRequest.Get(uri);
         // Request and wait for the desired page.
@@ -40,12 +35,10 @@ public class API_Manager : MonoBehaviour
             case UnityWebRequest.Result.ProtocolError:
                 break;
             case UnityWebRequest.Result.Success:
-                Debug.Log(":\nReceived: " + webRequest.downloadHandler.text);
-                JsonString = webRequest.downloadHandler.text;
-                Imagejson json = Imagejson.CreateFromJSON(JsonString);
-
-                json.printInfo();
-                DLImage.setImage(json.imageURL);
+                string imageUrl = webRequest.downloadHandler.text;
+                imageUrl = imageUrl.Substring(1, imageUrl.Length - 3);
+                Debug.Log(imageUrl);
+                DLImage.setImage(imageUrl);
                 break;
         }
 
